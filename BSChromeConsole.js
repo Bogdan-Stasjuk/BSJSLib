@@ -10,6 +10,14 @@
      */
     console.clearx = function() {};
 
+    /**
+     * Clears console when document is ready.
+     * @return {void}
+     */
+    $(document).ready(function() {
+        console.clear();
+    });
+
 
     BSChromeConsole = {
         /**
