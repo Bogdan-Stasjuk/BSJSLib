@@ -33,5 +33,12 @@ BSDOMHelper = {
                 console.log("type = " + event.type + ", localName = " + event.target.localName + ", className = " + event.target.className + ", id = " + event.target.id);
             });
         }
+    },
+
+    injectJSsource: function(source, onload) {
+        var nodeScript = document.createElement('script');
+        nodeScript.src = source;
+        nodeScript.onload = onload;
+        document.head.appendChild(nodeScript);
     }
 }
