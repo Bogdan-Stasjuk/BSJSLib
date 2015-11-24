@@ -1,44 +1,44 @@
 /*
-BSStringHelper
+BSStringHelper start
  */
 
 /*
  * Trim functions
  */
 
-String.prototype.trim = String.prototype.trim || function () {
+String.prototype.trim = String.prototype.trim || function() {
     return this.replace(/^\s+|\s+$/g, "");
 };
 
-String.prototype.ltrim = String.prototype.ltrim || function () {
+String.prototype.ltrim = String.prototype.ltrim || function() {
     return this.replace(/^\s+/, "");
 };
 
-String.prototype.rtrim = String.prototype.rtrim || function () {
+String.prototype.rtrim = String.prototype.rtrim || function() {
     return this.replace(/\s+$/, "");
 };
 
-String.prototype.fulltrim = function () {
+String.prototype.fulltrim = function() {
     return this.replace(/\s+/g, " ").trim();
 };
 
 
 String.format = function() {
-  var s = arguments[0];
-  for (var i = 0; i < arguments.length - 1; i++) {       
-    var reg = new RegExp("\\{" + i + "\\}", "gm");             
-    s = s.replace(reg, arguments[i + 1]);
-  }
+    var s = arguments[0];
+    for (var i = 0; i < arguments.length - 1; i++) {
+        var reg = new RegExp("\\{" + i + "\\}", "gm");
+        s = s.replace(reg, arguments[i + 1]);
+    }
 
-  return s;
+    return s;
 }
 
-String.prototype.endsWith = function (suffix) {
-  return (this.substr(this.length - suffix.length) === suffix);
+String.prototype.endsWith = function(suffix) {
+    return (this.substr(this.length - suffix.length) === suffix);
 }
 
 String.prototype.startsWith = function(prefix) {
-  return (this.substr(0, prefix.length) === prefix);
+    return (this.substr(0, prefix.length) === prefix);
 }
 
 
@@ -148,7 +148,7 @@ BSStringHelper = {
         var words = text.split(" ");
         var result = "";
 
-        for (i in words) {
+        for (var i in words) {
             var word = words[i].charAt(0).toUpperCase() + words[i].slice(1);
 
             if (result == "")
@@ -174,3 +174,7 @@ BSStringHelper = {
     // using
     // copy(stringToProjectName());
 }
+
+/*
+BSStringHelper end
+ */
