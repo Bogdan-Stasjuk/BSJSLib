@@ -1,7 +1,7 @@
  /*
- BSItunesSearch
-  */
- 
+  BSItunesSearch head
+   */
+
  BSItunesSearch = {
  	/**
  	 * Makes request to Itunes with designated search term and calls completion function on success. Will recursively calls itself on zero result and cut search term to the first "+" delimeter from the end.
@@ -20,7 +20,7 @@
  				var result = responseData.results[0];
  				if (result) {
  					var artworkUrl = result.artworkUrl100.replace("100x100bb", "10000x10000");
- 					console.log(artworkUrl);
+ 					console.log("artwork: " + artworkUrl);
 
  					result = {
  						itunesArtwork: artworkUrl,
@@ -39,3 +39,7 @@
  		});
  	}
  }
+
+ /*
+ BSItunesSearch head
+  */
