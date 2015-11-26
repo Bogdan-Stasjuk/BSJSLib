@@ -1,44 +1,55 @@
+/*
+BSChromeConsole head
+ */
+
+/**
+ * Cap for console's logger.
+ * @return {void}
+ */
+console.logx = function() {};
+
+/**
+ * Cap for console's clear function.
+ * @return {void}
+ */
+console.clearx = function() {};
+
+
+BSChromeConsole = {
     /**
-     * Cap for console's logger.
+     * Include jquery (https://jquery.com/download/) to the current page.
      * @return {void}
      */
-    console.logx = function() {};
+    includejQuery: function() {
+        var scriptElement = document.createElement('script');
+        scriptElement.src = "//code.jquery.com/jquery-2.1.4.min.js";
+        document.getElementsByTagName('head')[0].appendChild(scriptElement);
+    },
 
     /**
-     * Cap for console's clear function.
+     * Detects the document is "ready" state and calls "callback" after that.
+     * @param  {function} callback Function that will call after document will be ready.
      * @return {void}
      */
-    console.clearx = function() {};
+    documentIsReady: function(callback) {
+        $(document).ready(function() {
+            callback();
+        });
+    },
 
     /**
-     * Clears console when document is ready.
+     * Set all checkboxes to checked state.
      * @return {void}
      */
-    $(document).ready(function() {
-        console.clear();
-    });
-
-
-    BSChromeConsole = {
-        /**
-         * Include jquery (https://jquery.com/download/) to the current page.
-         * @return {void}
-         */
-        includejQuery: function() {
-            var scriptElement = document.createElement('script');
-            scriptElement.src = "//code.jquery.com/jquery-2.1.4.min.js";
-            document.getElementsByTagName('head')[0].appendChild(scriptElement);
-        },
-
-        /**
-         * Set all checkboxes to checked state.
-         * @return {void}
-         */
-        checkAllCheckboxes: function() {
-            var allInputs = document.getElementsByTagName("input");
-            for (var i = 0, max = allInputs.length; i < max; i++) {
-                if (allInputs[i].type === 'checkbox')
-                    allInputs[i].checked = true;
-            }
+    checkAllCheckboxes: function() {
+        var allInputs = document.getElementsByTagName("input");
+        for (var i = 0, max = allInputs.length; i < max; i++) {
+            if (allInputs[i].type === 'checkbox')
+                allInputs[i].checked = true;
         }
     }
+}
+
+/*
+BSChromeConsole tail
+ */
