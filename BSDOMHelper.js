@@ -1,3 +1,7 @@
+/*
+BSDOMHelper head
+ */
+
 /**
  * Cap for console's logger.
  * @return {void}
@@ -30,7 +34,7 @@ BSDOMHelper = {
             console.logx("bind event " + domEventNames[eventNameKey]);
 
             $(selector).bind(domEventNames[eventNameKey], function(event) {
-                console.log("type = " + event.type + ", localName = " + event.target.localName + ", className = " + event.target.className + ", id = " + event.target.id);
+                console.log("currentTarget = " + event.currentTarget.localName + ", type = " + event.type + ", localName = " + event.target.localName + ", className = " + event.target.className + ", id = " + event.target.id);
             });
         }
     },
@@ -42,3 +46,7 @@ BSDOMHelper = {
         document.head.appendChild(nodeScript);
     }
 }
+
+/*
+BSDOMHelper tail
+ */
