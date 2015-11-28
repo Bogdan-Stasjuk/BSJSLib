@@ -1,3 +1,7 @@
+/*
+BSImageHelper head
+ */
+
 BSImageHelper = {
   /**
    * Resizes image to fit to the current window
@@ -38,3 +42,7 @@ BSImageHelper = {
     };
   }
 }
+
+/*
+BSImageHelper tail
+ */

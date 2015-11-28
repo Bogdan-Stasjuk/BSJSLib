@@ -39,11 +39,22 @@ BSDOMHelper = {
         }
     },
 
-    injectJSsource: function(source, onload) {
+    injectJSSource: function(source, onload) {
         var nodeScript = document.createElement('script');
         nodeScript.src = source;
         nodeScript.onload = onload;
         document.head.appendChild(nodeScript);
+    },
+
+    /**
+     * Detects the document is "ready" state and calls "callback" after that.
+     * @param  {function} callback Function that will call after document will be ready.
+     * @return {void}
+     */
+    documentIsReady: function(callback) {
+        $(document).ready(function() {
+            callback();
+        });
     }
 }
 

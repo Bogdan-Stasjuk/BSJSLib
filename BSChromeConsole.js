@@ -27,17 +27,6 @@ BSChromeConsole = {
     },
 
     /**
-     * Detects the document is "ready" state and calls "callback" after that.
-     * @param  {function} callback Function that will call after document will be ready.
-     * @return {void}
-     */
-    documentIsReady: function(callback) {
-        $(document).ready(function() {
-            callback();
-        });
-    },
-
-    /**
      * Set all checkboxes to checked state.
      * @return {void}
      */

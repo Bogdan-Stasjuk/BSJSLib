@@ -1,6 +1,6 @@
  /*
-  BSItunesSearch head
-   */
+    BSItunesSearch head
+     */
 
  BSItunesSearch = {
  	/**
@@ -33,13 +33,13 @@
  					BSItunesSearch.makeRequest(term.substr(0, term.lastIndexOf("+")), completion);
  				}
  			},
- 			error: function(responseData) {
- 				console.log("Failed: " + responseData);
+ 			error: function(xhr, status, error) {
+ 				console.bslog("Failed: xhr.statusText = " + xhr.statusText + ", status = " + status + ", error = " + error);
  			}
  		});
  	}
  }
 
  /*
- BSItunesSearch head
+ BSItunesSearch tail
   */
