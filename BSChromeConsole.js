@@ -3,6 +3,11 @@ BSChromeConsole head
  */
 
 /**
+ * Shorthand equivalent of console.log
+ */
+console.bslog = console.log;
+
+/**
  * Cap for console's logger.
  * @return {void}
  */
