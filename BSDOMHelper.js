@@ -46,6 +46,22 @@ BSDOMHelper = {
         document.head.appendChild(nodeScript);
     },
 
+    injectCSSSource: function(source) {
+        var nodeCSS = document.createElement('link');
+        nodeCSS.rel = "stylesheet";
+        nodeCSS.type = "text/css";
+        nodeCSS.href = source;
+        document.head.appendChild(nodeCSS);
+    },
+
+    injectQtip: function() {
+        BSDOMHelper.injectJSSource("//code.jquery.com/jquery-2.1.4.min.js");
+        BSDOMHelper.injectJSSource("https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/jquery.qtip.js");
+        BSDOMHelper.injectJSSource("https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/imagesloaded.pkg.min.js");
+
+        BSDOMHelper.injectCSSSource("https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/jquery.qtip.css");
+    },
+
     /**
      * Detects the document is "ready" state and calls "callback" after that.
      * @param  {function} callback Function that will call after document will be ready.
