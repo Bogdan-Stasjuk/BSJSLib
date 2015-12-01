@@ -3,9 +3,15 @@ BSChromeConsole head
  */
 
 /**
- * Shorthand equivalent of console.log
+ * Equivalent of console.log
  */
 console.bslog = console.log;
+
+/**
+ * Cap for console logger's equivalent
+ * @return {[type]} [description]
+ */
+console.bslogx = function() {};
 
 /**
  * Cap for console's logger.

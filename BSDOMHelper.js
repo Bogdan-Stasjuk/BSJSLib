@@ -71,6 +71,16 @@ BSDOMHelper = {
         $(document).ready(function() {
             callback();
         });
+    },
+
+    triggerMousedown: function(selector, pageX, pageY) {
+        var $el = $(selector);
+        var event = jQuery.Event("mousedown", {
+            which: 1,
+            pageX: pageX,
+            pageY: pageY
+        });
+        $el.trigger(event);
     }
 }
 
