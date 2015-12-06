@@ -1,6 +1,6 @@
  /*
-    BSItunesSearch head
-     */
+       BSItunesSearch head
+        */
 
  BSItunesSearch = {
  	/**
@@ -11,32 +11,42 @@
  	 */
  	makeRequest: function(term, completion) {
  		var searchUrl = "https://itunes.apple.com/search?limit=1&term=" + term;
- 		console.log("search url: " + searchUrl);
+ 		console.bslog("search url: " + searchUrl);
 
- 		$.ajax({
- 			url: searchUrl,
- 			dataType: "jsonp",
- 			success: function(responseData) {
- 				var result = responseData.results[0];
- 				if (result) {
- 					var artworkUrl = result.artworkUrl100.replace("100x100bb", "10000x10000");
- 					console.log("artwork: " + artworkUrl);
+ 		function successCallback(responseData) {
+ 			var result = responseData.results[0];
+ 			console.bslogx("result: ", result);
 
- 					result = {
- 						itunesArtwork: artworkUrl,
- 						itunesArtist: result.artistName,
- 						itunesTrack: result.trackName,
- 						itunesAlbum: result.collectionName,
- 					};
- 					completion(result);
- 				} else if (term.indexOf("+") != -1) {
- 					BSItunesSearch.makeRequest(term.substr(0, term.lastIndexOf("+")), completion);
- 				}
- 			},
- 			error: function(xhr, status, error) {
- 				console.bslog("Failed: xhr.statusText = " + xhr.statusText + ", status = " + status + ", error = " + error);
+ 			if (result) {
+ 				var artworkUrl = result.artworkUrl100.replace("100x100bb", "10000x10000");
+
+ 				console.bslog("artwork:", artworkUrl, ", artist:", result.artistName, ", track:", result.trackName, ", album:", result.collectionName);
+
+ 				result = {
+ 					itunesArtwork: artworkUrl,
+ 					itunesArtist: result.artistName,
+ 					itunesTrack: result.trackName,
+ 					itunesAlbum: result.collectionName,
+ 				};
+ 				completion(result);
+ 			} else if (term.indexOf("+") != -1) {
+ 				BSItunesSearch.makeRequest(term.substr(0, term.lastIndexOf("+")), completion);
  			}
- 		});
+ 		}
+
+ 		var xmlhttp = new XMLHttpRequest();
+ 		xmlhttp.onreadystatechange = function() {
+ 			if (xmlhttp.readyState == 4) {
+ 				if (xmlhttp.status == 200) {
+ 					var responseText = JSON.parse(xmlhttp.responseText);
+ 					successCallback(responseText);
+ 				} else {
+ 					console.bslog("xmlhttp.statusText: ", xmlhttp.statusText);
+ 				}
+ 			}
+ 		};
+ 		xmlhttp.open("GET", searchUrl, true);
+ 		xmlhttp.send();
  	}
  }
 

@@ -104,6 +104,17 @@ BSStringHelper = {
         return a.hostname;
     },
 
+    getUrlParameter: function(url, param) {
+        var urlVariables = url.substr(url.indexOf('?') + 1).split('&');
+        for (var i = 0; i < urlVariables.length; i++) {
+            var urlParam = urlVariables[i].split('=');
+
+            if (urlParam[0] === param) {
+                var result = urlParam[1];
+                return (result === undefined) ? true : result;
+            }
+        }
+    },
 
     // string to lowercase and dot to comma
     strToLowCaseAndDotToComma: function() {
