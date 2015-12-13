@@ -17,3 +17,12 @@ jQuery.fn.single_double_click = function(single_click_callback, double_click_cal
 		});
 	});
 };
+
+
+BSEventHelper = {
+	Which: {
+		LeftButton: 1,
+		MiddleButton: 2,
+		RightButton: 3
+	},
+}
