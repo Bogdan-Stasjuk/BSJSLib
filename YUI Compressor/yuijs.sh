@@ -6,7 +6,7 @@ echox() {
 	return 0
 }
 
-YUI_PATH="/Users/stasjukb/Programming/JavaScript/YUI Compressor/yuicompressor-2.4.8.jar"
+YUI_PATH="/Users/stasjukb/Programming/JavaScript/BSJSLib/YUI Compressor/yuicompressor-2.4.8.jar"
 
 currentDir=${PWD##*/}
 minDirName="$currentDir min"

@@ -1,6 +1,6 @@
  /*
-       BSItunesSearch head
-        */
+        BSItunesSearch head
+         */
 
  BSItunesSearch = {
  	/**
