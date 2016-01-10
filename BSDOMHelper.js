@@ -46,6 +46,13 @@ BSDOMHelper = {
         document.head.appendChild(nodeScript);
     },
 
+    injectJSCode: function(code, onload) {
+        var nodeScript = document.createElement('script');
+        nodeScript.innerHTML = code;
+        nodeScript.onload = onload;
+        document.head.appendChild(nodeScript);
+    },
+
     injectCSSSource: function(source) {
         var nodeCSS = document.createElement('link');
         nodeCSS.rel = "stylesheet";
