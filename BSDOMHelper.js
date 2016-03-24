@@ -1,7 +1,3 @@
-/*
-BSDOMHelper head
- */
-
 /**
  * Cap for console's logger.
  * @return {void}
@@ -61,6 +57,14 @@ BSDOMHelper = {
         document.head.appendChild(nodeCSS);
     },
 
+    injectCSSCode: function(code) {
+        var nodeCSS = document.createElement('style');
+        nodeCSS.id = "testID";
+        nodeCSS.type = "text/css";
+        nodeCSS.innerHTML = code;
+        document.head.appendChild(nodeCSS);
+    },
+
     injectQtip: function() {
         BSDOMHelper.injectJSSource("//code.jquery.com/jquery-2.1.4.min.js");
         BSDOMHelper.injectJSSource("https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/jquery.qtip.js");
@@ -90,7 +94,3 @@ BSDOMHelper = {
         $el.trigger(event);
     }
 }
-
-/*
-BSDOMHelper tail
- */
