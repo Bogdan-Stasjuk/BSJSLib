@@ -1,7 +1,3 @@
- /*
-        BSItunesSearch head
-         */
-
  BSItunesSearch = {
  	/**
  	 * Makes request to Itunes with designated search term and calls completion function on success. Will recursively calls itself on zero result and cut search term to the first "+" delimeter from the end.
@@ -49,7 +45,3 @@
  		xmlhttp.send();
  	}
  }
-
- /*
- BSItunesSearch tail
-  */
