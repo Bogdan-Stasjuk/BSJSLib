@@ -16,7 +16,9 @@ minDirPath="../$minDirName"
 echox "$minDirPath"
 if [[ -d "$minDirPath" ]]; then
 	rm -rf "$minDirPath"
-	echox "$minDirPath was removed"
+	echo "$minDirPath was removed"
+else
+	echo "$minDirPath couldn't be found"
 fi
 mkdir "$minDirPath"
 
@@ -48,3 +50,13 @@ searchJSFilesAndApplyObfuscator() {
 }
 
 searchJSFilesAndApplyObfuscator "*"
+
+zipMinDirPath="$minDirPath.zip"
+echox "$zipMinDirPath"
+if [ -f "$zipMinDirPath" ]; then
+	rm "$zipMinDirPath"
+	echo "$zipMinDirPath was removed"
+else
+	echo "$zipMinDirPath couldn't be found"
+fi
+zip -r "$zipMinDirPath" "$minDirPath"
