@@ -59,4 +59,4 @@ if [ -f "$zipMinDirPath" ]; then
 else
 	echo "$zipMinDirPath couldn't be found"
 fi
-zip -r "$zipMinDirPath" "$minDirPath"
+ditto -c -k --sequesterRsrc --keepParent "$minDirPath" "$zipMinDirPath"
