@@ -1,8 +1,4 @@
 /*
-BSStringHelper start
- */
-
-/*
  * Trim functions
  */
 
@@ -87,6 +83,81 @@ String.prototype.reverse = function() {
     return result;
 }
 
+String.prototype.transliterate = String.prototype.transliterate || function() {
+    var translitDic = {
+        "Ё": "YO",
+        "Й": "I",
+        "Ц": "TS",
+        "У": "U",
+        "К": "K",
+        "Е": "E",
+        "Н": "N",
+        "Г": "G",
+        "Ш": "SH",
+        "Щ": "SCH",
+        "З": "Z",
+        "Х": "H",
+        "Ъ": "'",
+        "ё": "yo",
+        "й": "i",
+        "ц": "ts",
+        "у": "u",
+        "к": "k",
+        "е": "e",
+        "н": "n",
+        "г": "g",
+        "ш": "sh",
+        "щ": "sch",
+        "з": "z",
+        "х": "h",
+        "ъ": "'",
+        "Ф": "F",
+        "Ы": "I",
+        "В": "V",
+        "А": "a",
+        "П": "P",
+        "Р": "R",
+        "О": "O",
+        "Л": "L",
+        "Д": "D",
+        "Ж": "ZH",
+        "Э": "E",
+        "ф": "f",
+        "ы": "i",
+        "в": "v",
+        "а": "a",
+        "п": "p",
+        "р": "r",
+        "о": "o",
+        "л": "l",
+        "д": "d",
+        "ж": "zh",
+        "э": "e",
+        "Я": "Ya",
+        "Ч": "CH",
+        "С": "S",
+        "М": "M",
+        "И": "I",
+        "Т": "T",
+        "Ь": "'",
+        "Б": "B",
+        "Ю": "YU",
+        "я": "ya",
+        "ч": "ch",
+        "с": "s",
+        "м": "m",
+        "и": "i",
+        "т": "t",
+        "ь": "'",
+        "б": "b",
+        "ю": "yu"
+    };
+
+    return this.split('').map(function(symbol) {
+        return translitDic[symbol] || symbol;
+    }).join('');
+}
+
 
 BSStringHelper = {
 
@@ -97,6 +168,9 @@ BSStringHelper = {
         return text;
     },
 
+    isUrlValid: function(url) {
+        return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
+    },
 
     getHostname: function(url) {
         var a = document.createElement('a');

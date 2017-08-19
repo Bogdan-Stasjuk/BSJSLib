@@ -27,10 +27,10 @@ BSDOMHelper = {
     checkDOMEventsForSelector: function(selector) {
         var domEventNames = BSDOMHelper.domEventNames();
         for (var eventNameKey in domEventNames) {
-            console.logx("bind event " + domEventNames[eventNameKey]);
+            console.bslogx("bind event " + domEventNames[eventNameKey]);
 
             $(selector).bind(domEventNames[eventNameKey], function(event) {
-                console.log("currentTarget = " + event.currentTarget.localName + ", type = " + event.type + ", localName = " + event.target.localName + ", className = " + event.target.className + ", id = " + event.target.id);
+                console.bslog("currentTarget = " + event.currentTarget.localName + ", type = " + event.type + ", localName = " + event.target.localName + ", className = " + event.target.className + ", id = " + event.target.id);
             });
         }
     },
@@ -92,5 +92,13 @@ BSDOMHelper = {
             pageY: pageY
         });
         $el.trigger(event);
+    },
+
+    removeHtmlComments: function(selector) {
+        $(selector).contents().each(function() {
+            if (this.nodeType === Node.COMMENT_NODE) {
+                $(this).remove();
+            }
+        });
     }
 }

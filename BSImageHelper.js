@@ -1,7 +1,3 @@
-/*
-BSImageHelper head
- */
-
 BSImageHelper = {
   /**
    * Resizes image to fit to the current window
@@ -12,26 +8,27 @@ BSImageHelper = {
     img.css('width', 'auto');
     img.css('height', 'auto');
 
-    var maxWidth = $(window).width(); // Max width for the image
-    var maxHeight = $(window).height(); // Max height for the image
-    var ratio = 0; // Used for aspect ratio
+    var windowWidth = window.innerWidth; // Max width for the image
+    var windowHeight = window.innerHeight; // Max height for the image
+    console.bslogx(String.format("windowWidth: {0}, windowHeight: {1}", windowWidth, windowHeight));
+
     var width = img.width(); // Current image width
     var height = img.height(); // Current image height
 
     // Check if the current width is larger than the max
-    if (width > maxWidth) {
-      ratio = maxWidth / width; // get ratio for scaling image
-      width = maxWidth;
+    if (width > windowWidth) {
+      var ratio = windowWidth / width; // get ratio for scaling image
+      width = windowWidth;
       height = height * ratio;
       img.css("width", width); // Set new width
       img.css("height", height); // Scale height based on ratio
     }
 
     // Check if current height is larger than the max
-    if (height > maxHeight) {
-      ratio = maxHeight / height; // get ratio for scaling image
+    if (height > windowHeight) {
+      var ratio = windowHeight / height; // get ratio for scaling image
       width = width * ratio;
-      height = maxHeight;
+      height = windowHeight;
       img.css("width", width); // Scale width based on ratio
       img.css("height", height); // Set new height
     }
@@ -42,7 +39,3 @@ BSImageHelper = {
     };
   }
 }
-
-/*
-BSImageHelper tail
- */

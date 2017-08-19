@@ -7,7 +7,7 @@
  	 */
  	makeRequest: function(term, completion) {
  		var searchUrl = "https://itunes.apple.com/search?limit=1&term=" + term;
- 		console.bslog("search url: " + searchUrl);
+ 		console.bslogx("search url: " + searchUrl);
 
  		function successCallback(responseData) {
  			var result = responseData.results[0];
@@ -16,7 +16,7 @@
  			if (result) {
  				var artworkUrl = result.artworkUrl100.replace("100x100bb", "10000x10000");
 
- 				console.bslog("artwork:", artworkUrl, ", artist:", result.artistName, ", track:", result.trackName, ", album:", result.collectionName);
+ 				console.bslogx("artwork:", artworkUrl, ", artist:", result.artistName, ", track:", result.trackName, ", album:", result.collectionName);
 
  				result = {
  					itunesArtwork: artworkUrl,

@@ -1,15 +1,29 @@
-/*
-BSChromeConsole head
- */
-
 /**
  * Equivalent of console.log
  */
 console.bslog = console.log;
 
 /**
+ * Disable standard logging by console
+ */
+console.log = function() {};
+
+/**
+ * logs info with variable amount of arguments using String.format
+ * @return {void}
+ */
+console.bslogf = function() {
+    var s = arguments[0];
+    for (var i = 0; i < arguments.length - 1; i++) {
+        var reg = new RegExp("\\{" + i + "\\}", "gm");
+        s = s.replace(reg, arguments[i + 1]);
+    }
+    console.bslog(s);
+}
+
+/**
  * Cap for console logger's equivalent
- * @return {[type]} [description]
+ * @return {void}
  */
 console.bslogx = function() {};
 
@@ -18,6 +32,12 @@ console.bslogx = function() {};
  * @return {void}
  */
 console.logx = function() {};
+
+/**
+ * Cap for equivalent of console logger with format
+ * @return {void}
+ */
+console.bslogfx = function() {};
 
 /**
  * Cap for console's clear function.
