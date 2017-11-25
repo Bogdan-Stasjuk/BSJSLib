@@ -160,7 +160,6 @@ String.prototype.transliterate = String.prototype.transliterate || function() {
 
 
 BSStringHelper = {
-
     textPrompt: function() {
         var text = prompt("Input text");
         text = text.fulltrim();
@@ -192,7 +191,7 @@ BSStringHelper = {
 
     // string to lowercase and dot to comma
     strToLowCaseAndDotToComma: function() {
-        var text = textPrompt();
+        var text = this.textPrompt();
         text = text.replace(/\./g, ",");
         text = text.toLowerCase();
 
@@ -204,7 +203,7 @@ BSStringHelper = {
 
     // string to lowercase and whitespaces to hyphens
     strToLowCaseAndSpaceToHyphen: function() {
-        var text = textPrompt();
+        var text = this.textPrompt();
         text = text.replace(/ /g, "-");
         text = text.toLowerCase();
 
@@ -223,12 +222,12 @@ BSStringHelper = {
 
         return text;
     },
-    // using
+    // usage
     // copy(strToUpperCaseAndSpaceToUnderscore())
 
 
     stringToMethodName: function() {
-        var text = textPrompt();
+        var text = this.textPrompt();
         text = text.toLowerCase();
         var words = text.split(" ");
         var result = "";
@@ -246,17 +245,17 @@ BSStringHelper = {
 
         return result;
     },
-    // using
+    // usage
     // copy(stringToMethodName());
 
 
     stringToProjectName: function() {
-        var projectName = stringToMethodName();
+        var projectName = this.stringToMethodName();
         projectName = projectName.charAt(0).toUpperCase() + projectName.slice(1);
         console.log("%s", projectName);
         return projectName;
     },
-    // using
+    // usage
     // copy(stringToProjectName());
 }
 
