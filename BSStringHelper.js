@@ -258,7 +258,3 @@ BSStringHelper = {
     // usage
     // copy(stringToProjectName());
 }
-
-/*
-BSStringHelper end
- */

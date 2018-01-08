@@ -69,7 +69,3 @@ BSChromeConsole = {
         }
     }
 }
-
-/*
-BSChromeConsole tail
- */
