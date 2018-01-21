@@ -1,10 +1,3 @@
-/**
- * Cap for console's logger.
- * @return {void}
- */
-console.logx = function() {};
-
-
 BSDOMHelper = {
     domEventNames: function() {
         return [
