@@ -6,7 +6,7 @@ console.bslog = console.log;
 /**
  * Disable standard logging by console
  */
-console.log = function() {};
+console.log = function(...args) {};
 
 /**
  * logs info with variable amount of arguments using String.format
@@ -25,7 +25,7 @@ console.bslogf = function() {
  * Cap for console logger's equivalent
  * @return {void}
  */
-console.bslogx = function() {};
+console.bslogx = function(...args) {};
 
 /**
  * Cap for console's logger.
@@ -37,7 +37,7 @@ console.logx = function() {};
  * Cap for equivalent of console logger with format
  * @return {void}
  */
-console.bslogfx = function() {};
+console.bslogfx = function(...args) {};
 
 /**
  * Cap for console's clear function.

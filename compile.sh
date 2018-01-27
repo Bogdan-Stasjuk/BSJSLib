@@ -13,15 +13,19 @@ if [[ -f "$compilerZipPath" ]]; then
 	rm -rf "$compilerZipPath"
 	echo "old $compilerZipPath was removed"
 fi
-curl -o "$compilerZipPath" "https://dl.google.com/closure-compiler/compiler-latest.zip"
 
 compilerFolderPath="$scriptDir/compiler"
-if [[ -d "$compilerFolderPath" ]]; then
-	rm -rf "$compilerFolderPath"
-	echo "old $compilerFolderPath was removed"
+echox "compilerFolderPath: $compilerFolderPath"
+if curl -f -o "$compilerZipPath" "https://dl.google.com/closure-compiler/compiler-latest.zip"; then
+	if [[ -d "$compilerFolderPath" ]]; then
+		rm -rf "$compilerFolderPath"
+		echo "old $compilerFolderPath was removed"
+	fi
+	unzip "$compilerZipPath" -d "$compilerFolderPath"
+	rm "$compilerZipPath"
+else
+	echo "can't download compiler from https://dl.google.com/closure-compiler/compiler-latest.zip";
 fi
-unzip "$compilerZipPath" -d "$compilerFolderPath"
-rm "$compilerZipPath"
 
 compilerPath=""
 compilerSearchPath="$compilerFolderPath/*"
@@ -45,7 +49,7 @@ fi
 mkdir "$minDirPath"
 
 scriptAbsolutePath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-echo "$scriptAbsolutePath"
+echox "$scriptAbsolutePath"
 
 compileOrCopy() {
 	local searchPath=$1
@@ -55,13 +59,14 @@ compileOrCopy() {
 		do 
 			if [ -d "$itemName" ]
 				then
-					if  [ "$itemName" != "$compilerFolderPath" ]
+					echox "dirname: $itemName"
+					if  [[ "$compilerFolderPath" != *"$itemName" ]]
 					 then
 						mkdir "$minDirPath/$itemName"
 						compileOrCopy "$itemName/*"
 					fi
 				else
-					if [[ "${itemName##*.}" == "js" && $itemName != *".min.js"* ]]; 
+					if [[ "${itemName##*.}" == "js" && $itemName != *".min.js" ]]; 
 						then
 							java -jar "$compilerPath" --compilation_level SIMPLE_OPTIMIZATIONS --js_output_file="$minDirPath/$itemName" "$itemName"
 							if (( $? )); then
@@ -70,7 +75,7 @@ compileOrCopy() {
 							else
 								echo "$itemName was minified"
 							fi
-						elif [[ "$scriptAbsolutePath" != *"$itemName"* ]]
+						elif [[ "$scriptAbsolutePath" != *"$itemName" ]]
 							then
 								cp "$itemName" "$minDirPath/$itemName"
 								echo "$itemName was copied"
@@ -80,7 +85,6 @@ compileOrCopy() {
 }
 
 compileOrCopy "*"
-rm -rf "$compilerFolderPath"
 
 zipMinDirPath="$minDirPath.zip"
 echox "$zipMinDirPath"
