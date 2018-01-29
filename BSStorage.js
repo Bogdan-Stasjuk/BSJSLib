@@ -9,7 +9,7 @@ BSStorage = {
             key: BSStorageDefaults.get()
         }, function(items) {
             var value = items.key;
-            console.logx("Did get values: " + value);
+            console.bslogx("Did get values: " + value);
             completion(value);
         });
     },
