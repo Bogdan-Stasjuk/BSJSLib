@@ -1,29 +1,27 @@
 BSDOMHelper = {
-    domEventNames: function() {
-        return [
-            "DOMActivate",
-            "DOMAttrModified",
-            "DOMAttributeNameChanged",
-            "DOMCharacterDataModified",
-            "DOMContentLoaded",
-            "DOMElementNameChanged",
-            "DOMFocusIn",
-            "DOMFocusOut",
-            "DOMNodeInserted",
-            "DOMNodeInsertedIntoDocument",
-            "DOMNodeRemoved",
-            "DOMNodeRemovedFromDocument",
-            "DOMSubtreeModified",
-        ];
+    EventNames: {
+        DOMActivate: "DOMActivate",
+        DOMAttrModified: "DOMAttrModified",
+        DOMAttributeNameChanged: "DOMAttributeNameChanged",
+        DOMCharacterDataModified: "DOMCharacterDataModified",
+        DOMContentLoaded: "DOMContentLoaded",
+        DOMElementNameChanged: "DOMElementNameChanged",
+        DOMFocusIn: "DOMFocusIn",
+        DOMFocusOut: "DOMFocusOut",
+        DOMNodeInserted: "DOMNodeInserted",
+        DOMNodeInsertedIntoDocument: "DOMNodeInsertedIntoDocument",
+        DOMNodeRemoved: "DOMNodeRemoved",
+        DOMNodeRemovedFromDocument: "DOMNodeRemovedFromDocument",
+        DOMSubtreeModified: "DOMSubtreeModified",
     },
 
     checkDOMEventsForSelector: function(selector) {
-        var domEventNames = BSDOMHelper.domEventNames();
+        var domEventNames = BSDOMHelper.EventNames;
         for (var eventNameKey in domEventNames) {
             console.bslogx("bind event " + domEventNames[eventNameKey]);
 
             $(selector).bind(domEventNames[eventNameKey], function(event) {
-                console.bslog("currentTarget = " + event.currentTarget.localName + ", type = " + event.type + ", localName = " + event.target.localName + ", className = " + event.target.className + ", id = " + event.target.id);
+                console.bslog("checkDOMEventsForSelector: event =", event);
             });
         }
     },
