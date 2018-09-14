@@ -57,7 +57,7 @@ BSDOMHelper = {
     },
 
     injectQtip: function() {
-        BSDOMHelper.injectJSSource("//code.jquery.com/jquery-2.1.4.min.js");
+        BSDOMHelper.injectJSSource("http://code.jquery.com/jquery-3.3.1.min.js");
         BSDOMHelper.injectJSSource("https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/jquery.qtip.js");
         BSDOMHelper.injectJSSource("https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/imagesloaded.pkg.min.js");
 
@@ -86,7 +86,7 @@ BSDOMHelper = {
     },
 
     removeHtmlComments: function(selector) {
-        $(selector).contents().each(function() {
+        $(selector ? selector : 'body').contents().each(function() {
             if (this.nodeType === Node.COMMENT_NODE) {
                 $(this).remove();
             }
