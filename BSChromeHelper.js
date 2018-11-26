@@ -7,7 +7,7 @@ class BSChromeHelper {
             if (activeTab && activeTab !== undefined) {
                 completion(activeTab);
             } else {
-                console.bslog("BSChromeHelper.getActiveTab: activeTab =", activeTab);
+                console.bslogx("BSChromeHelper.getActiveTab: activeTab =", activeTab);
             }
         });
     }

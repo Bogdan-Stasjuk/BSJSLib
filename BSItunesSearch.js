@@ -37,7 +37,7 @@
  					var responseText = JSON.parse(xmlhttp.responseText);
  					successCallback(responseText);
  				} else {
- 					console.bslog("xmlhttp.statusText: ", xmlhttp.statusText);
+ 					console.bslogx("xmlhttp.statusText: ", xmlhttp.statusText);
  				}
  			}
  		};
