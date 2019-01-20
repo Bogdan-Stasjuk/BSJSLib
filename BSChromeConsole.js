@@ -1,7 +1,13 @@
+let DEBUG = false;
+
+if (DEBUG) {
+    console.clear();
+}
+
 /**
  * Equivalent of console.log
  */
-console.bslog = console.log;
+console.bslog = DEBUG ? console.log : function(...args) {};
 
 /**
  * Disable standard logging by console
