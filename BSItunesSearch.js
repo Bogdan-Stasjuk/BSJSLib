@@ -7,16 +7,16 @@
  	 */
  	makeRequest: function(term, completion) {
  		var searchUrl = "https://itunes.apple.com/search?limit=1&term=" + term;
- 		console.bslogx("search url: " + searchUrl);
+ 		console.bslog("search url: " + searchUrl);
 
  		function successCallback(responseData) {
  			var result = responseData.results[0];
- 			console.bslogx("result: ", result);
+ 			console.bslog("result: ", result);
 
  			if (result) {
  				var artworkUrl = result.artworkUrl100.replace("100x100bb", "10000x10000");
 
- 				console.bslogx("artwork:", artworkUrl, ", artist:", result.artistName, ", track:", result.trackName, ", album:", result.collectionName);
+ 				console.bslog("artwork:", artworkUrl, ", artist:", result.artistName, ", track:", result.trackName, ", album:", result.collectionName);
 
  				result = {
  					itunesArtwork: artworkUrl,
@@ -30,18 +30,15 @@
  			}
  		}
 
- 		var xmlhttp = new XMLHttpRequest();
- 		xmlhttp.onreadystatechange = function() {
- 			if (xmlhttp.readyState == 4) {
- 				if (xmlhttp.status == 200) {
- 					var responseText = JSON.parse(xmlhttp.responseText);
- 					successCallback(responseText);
- 				} else {
- 					console.bslogx("xmlhttp.statusText: ", xmlhttp.statusText);
- 				}
- 			}
- 		};
- 		xmlhttp.open("GET", searchUrl, true);
- 		xmlhttp.send();
+        chrome.runtime.sendMessage({
+            type: Constants.RuntimeMessage.HttpRequest,
+            url: searchUrl
+        }
+        , function(response) {
+            console.bslog("response =", response);
+            if (response && response !== undefined) {
+                successCallback(response);
+            }
+        });
  	}
  }

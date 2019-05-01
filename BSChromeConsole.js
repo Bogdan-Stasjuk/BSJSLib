@@ -1,9 +1,5 @@
 let DEBUG = false;
 
-if (DEBUG) {
-    console.clear();
-}
-
 /**
  * Equivalent of console.log
  */
