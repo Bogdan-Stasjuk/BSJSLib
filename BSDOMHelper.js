@@ -26,6 +26,12 @@ BSDOMHelper = {
         }
     },
 
+    addEventListener(selector, eventName) {
+        document.querySelector(selector).addEventListener(eventName, (event) => {
+            console.bslog(event);
+        });
+    },
+
     injectJSSource: function(source, onload) {
         var nodeScript = document.createElement('script');
         nodeScript.src = source;
