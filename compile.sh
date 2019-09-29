@@ -57,29 +57,26 @@ compileOrCopy() {
 
 	for itemName in $searchPath
 		do 
-			if [ -d "$itemName" ]
-				then
-					echox "dirname: $itemName"
-					if  [[ "$compilerFolderPath" != *"$itemName" ]]
-					 then
-						mkdir "$minDirPath/$itemName"
-						compileOrCopy "$itemName/*"
+			if [ -d "$itemName" ]; then
+				echox "dirname: $itemName"
+				if  [[ "$compilerFolderPath" != *"${itemName}" ]]; then
+					mkdir "$minDirPath/$itemName"
+					compileOrCopy "$itemName/*"
+				fi
+			elif [ "${itemName##*.}" = "md" ]; then
+				echo "${itemName} was skipped"
+			else
+				if [[ "${itemName##*.}" == "js" && $itemName != *".min.js" ]]; then
+					if java -jar "$compilerPath" --compilation_level SIMPLE_OPTIMIZATIONS --js_output_file="$minDirPath/$itemName" "$itemName"; then
+						echo "${itemName} was minified"
+					else
+						echo "${itemName} wasn't minified"
+						exit 1
 					fi
-				else
-					if [[ "${itemName##*.}" == "js" && $itemName != *".min.js" ]]; 
-						then
-							java -jar "$compilerPath" --compilation_level SIMPLE_OPTIMIZATIONS --js_output_file="$minDirPath/$itemName" "$itemName"
-							if (( $? )); then
-								echo "$file was not able to be minified" >&2
-								exit 1
-							else
-								echo "$itemName was minified"
-							fi
-						elif [[ "$scriptAbsolutePath" != *"$itemName" ]]
-							then
-								cp "$itemName" "$minDirPath/$itemName"
-								echo "$itemName was copied"
-					fi
+				elif [[ "$scriptAbsolutePath" != *"$itemName" ]]; then
+						cp "$itemName" "$minDirPath/$itemName"
+						echo "$itemName was copied"
+				fi
 			fi
 		done
 }
