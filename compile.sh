@@ -6,7 +6,7 @@ echox() {
 	return 0
 }
 
-scriptDir="$(dirname "$0")"
+readonly scriptDir="$(dirname "$0")"
 
 compilerZipPath="$scriptDir/compiler.zip"
 if [[ -f "$compilerZipPath" ]]; then
@@ -38,18 +38,15 @@ for itemName in $compilerSearchPath
 		fi
 	done
 
-currentDir=${PWD##*/}
-minDirName="${currentDir}Min"
-minDirPath="../$minDirName"
-echox "$minDirPath"
+readonly projDir="$(dirname "${scriptDir}")"
+readonly minDirPath="${projDir}Min"
 if [[ -d "$minDirPath" ]]; then
 	rm -rf "$minDirPath"
 	echo "old $minDirPath was removed"
 fi
 mkdir "$minDirPath"
 
-scriptAbsolutePath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-echox "$scriptAbsolutePath"
+cd "${projDir}" || exit 1
 
 compileOrCopy() {
 	local searchPath=$1
@@ -73,7 +70,7 @@ compileOrCopy() {
 						echo "${itemName} wasn't minified"
 						exit 1
 					fi
-				elif [[ "$scriptAbsolutePath" != *"$itemName" ]]; then
+				elif [[ "${0}" != *"$itemName" ]]; then
 						cp "$itemName" "$minDirPath/$itemName"
 						echo "$itemName was copied"
 				fi
@@ -87,6 +84,6 @@ zipMinDirPath="$minDirPath.zip"
 echox "$zipMinDirPath"
 if [ -f "$zipMinDirPath" ]; then
 	rm "$zipMinDirPath"
-	echo "old $zipMinDirPath was removed"
+	echo "old ${zipMinDirPath} was removed"
 fi
-ditto -c -k --sequesterRsrc --keepParent "$minDirPath" "$zipMinDirPath"
+ditto -c -k --sequesterRsrc --keepParent "$minDirPath" "$zipMinDirPath" && echo "new ${zipMinDirPath} was created"
